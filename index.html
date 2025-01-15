@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Weather App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Advanced Weather App</h1>
+    <form id="location-form">
+      <label for="location">Enter Location:</label>
+      <input type="text" id="location" placeholder="City, Zip Code, etc." required>
+      <label for="start-date">Start Date:</label>
+      <input type="date" id="start-date" required>
+      <label for="end-date">End Date:</label>
+      <input type="date" id="end-date" required>
+      <button type="submit">Get Weather</button>
+    </form>
+    <div id="weather-results"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
