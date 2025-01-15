@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f8ff;
+        }
+        .weather-app {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .weather-app input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .weather-app button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .weather-app button:hover {
+            background-color: #0056b3;
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .info-button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .info-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-app">
+        <h1>Weather App</h1>
+        <input type="text" id="location" placeholder="Enter location (City, Zip Code, etc.)">
+        <button onclick="getWeather()">Get Weather</button>
+        <button class="info-button" onclick="showInfo()">Info</button>
+        <div class="weather-info" id="weather-info"></div>
+        <div class="footer">Developed by Omkar Shewale</div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const location = document.getElementById('location').value;
+            const apiKey = '67577b891172d02c6219e50e499ffe5e';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Location not found');
+                }
+
+                const data = await response.json();
+
+                const weatherInfo = `
+                    <h2>${data.name}, ${data.sys.country}</h2>
+                    <p>Temperature: ${data.main.temp} &#8451;</p>
+                    <p>Weather: ${data.weather[0].description}</p>
+                    <p>Humidity: ${data.main.humidity}%</p>
+                    <p>Wind Speed: ${data.wind.speed} m/s</p>
+                `;
+                document.getElementById('weather-info').innerHTML = weatherInfo;
+            } catch (error) {
+                document.getElementById('weather-info').innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        }
+
+        function showInfo() {
+            alert("PM Accelerator is a community dedicated to accelerating the careers of aspiring and current Product Managers. Visit our LinkedIn page for more details: Product Manager Accelerator.");
+        }
+    </script>
+</body>
+</html>
